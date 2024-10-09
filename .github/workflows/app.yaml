@@ -43,3 +43,10 @@ jobs:
           --region $REGION \
           --port "${{ env.PORT }}"
           --allow-unauthenticated # Remove this flag if you want to secure the service
+
+    - name: Set IAM Policy to Allow Public Access
+      run: |
+        gcloud run services add-iam-policy-binding $SERVICE_NAME \
+          --region=$REGION \
+          --member="allUsers" \
+          --role="roles/run.invoker"
