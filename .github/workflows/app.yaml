@@ -11,8 +11,8 @@ jobs:
     env:
       IMAGE_NAME: lesson-087
       PROJECT_ID: mlops-437407
-      REGION: asia-east1 # Use a valid Cloud Run region
-      SERVICE_NAME: my-service # Change to your desired service name
+      REGION: asia-east1 # Change to your Cloud Run region
+      SERVICE_NAME: my-service # Change to your Cloud Run service name
 
     steps:
     - name: Checkout
@@ -41,3 +41,10 @@ jobs:
           --platform managed \
           --region $REGION \
           --allow-unauthenticated # Remove this flag if you want to secure the service
+
+    - name: Set IAM Policy to Allow Public Access
+      run: |
+        gcloud beta run services add-iam-policy-binding $SERVICE_NAME \
+          --region=$REGION \
+          --member="allUsers" \
+          --role="roles/run.invoker"
