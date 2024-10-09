@@ -13,6 +13,7 @@ jobs:
       PROJECT_ID: mlops-437407
       REGION: asia-south1 # Change to your Cloud Run region
       SERVICE_NAME: my-service # Change to your Cloud Run service name
+      PORT : 8051
 
     steps:
     - name: Checkout
@@ -40,4 +41,5 @@ jobs:
           --image gcr.io/$PROJECT_ID/$IMAGE_NAME:latest \
           --platform managed \
           --region $REGION \
+          --set-env-vars "PORT=${{ env.PORT }}"
           --allow-unauthenticated # Remove this flag if you want to secure the service
