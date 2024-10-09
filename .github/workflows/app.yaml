@@ -13,7 +13,7 @@ jobs:
       PROJECT_ID: mlops-437407
       REGION: asia-south1 # Change to your Cloud Run region
       SERVICE_NAME: my-service # Change to your Cloud Run service name
-      PORT : 8051
+      PORT : 8501
 
     steps:
     - name: Checkout
